@@ -1,17 +1,12 @@
 package com.dreamsindevelopment.shirtster.screens;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.GL20;
-import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
-import com.badlogic.gdx.math.Circle;
-import com.dreamsindevelopment.shirtster.Assets;
+import com.dreamsindevelopment.shirtster.utils.Assets;
 import com.dreamsindevelopment.shirtster.ShirtsterGame;
 import com.dreamsindevelopment.shirtster.entites.Player;
 import com.dreamsindevelopment.shirtster.handlers.TileManager;
-
-import java.awt.Rectangle;
 
 public class PlayScreen extends GameScreen {
 

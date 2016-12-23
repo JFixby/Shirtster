@@ -7,9 +7,9 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.utils.viewport.FitViewport;
-import com.dreamsindevelopment.shirtster.handlers.TileManager;
 import com.dreamsindevelopment.shirtster.screens.GameScreen;
 import com.dreamsindevelopment.shirtster.screens.PlayScreen;
+import com.dreamsindevelopment.shirtster.utils.Assets;
 
 import java.util.Stack;
 
@@ -32,14 +32,14 @@ public class ShirtsterGame extends Game {
 
     @Override
     public void create() {
-        Assets.load();
+        com.dreamsindevelopment.shirtster.utils.Assets.load();
 
         camera = new OrthographicCamera(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
         hudCamera = new OrthographicCamera(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
         spriteBatch = new SpriteBatch();
 
         stage = new Stage(new FitViewport(W_Width, W_Height, camera));
-        skin = Assets.pixthulhuSkin;
+        skin = (Skin) Assets.get("pixthulhuSkin");
 
         Gdx.input.setInputProcessor(stage);
 

@@ -2,18 +2,15 @@ package com.dreamsindevelopment.shirtster.entites;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.InputProcessor;
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
-import com.badlogic.gdx.math.Circle;
 import com.badlogic.gdx.math.Vector2;
-import com.badlogic.gdx.scenes.scene2d.Actor;
-import com.dreamsindevelopment.shirtster.Assets;
+import com.dreamsindevelopment.shirtster.utils.Assets;
 
 public class Player extends Entity implements InputProcessor {
 
-    private TextureAtlas textureAtlas = Assets.assetManager.get(Assets.playerSpritesheet, TextureAtlas.class);
+    private TextureAtlas textureAtlas;
     private TextureRegion leftTexture, rightTexture, currentTexture;
     public float alpha = 1f;
 
@@ -25,6 +22,7 @@ public class Player extends Entity implements InputProcessor {
     public Player(Entity entity) {
         super(entity.boundingCircle);
 
+        textureAtlas = (TextureAtlas) Assets.get("playerTextureAtlas");
         leftTexture = textureAtlas.findRegion("player_left");
         rightTexture = textureAtlas.findRegion("player_right");
         currentTexture = rightTexture;
