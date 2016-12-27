@@ -1,4 +1,4 @@
-package com.dreamsindevelopment.shirtster.handlers;
+package com.dreamsindevelopment.shirtster.utils;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.maps.tiled.TiledMap;
@@ -61,11 +61,12 @@ public class TileManager {
                     obstacles = new ArrayList<Obstacle>();
                     for(int j=0; j<cellList.size(); j++){
                         obstacle = new Obstacle();
-                        obstacle.setBounds(
-                                cellList.get(j).getBounds().x,
-                                cellList.get(j).getBounds().y,
-                                cellList.get(j).getBounds().width,
-                                cellList.get(j).getBounds().height
+                        obstacle.setBoundingBox(new Rectangle(
+                                        cellList.get(j).getBounds().x,
+                                        cellList.get(j).getBounds().y,
+                                        cellList.get(j).getBounds().width,
+                                        cellList.get(j).getBounds().height
+                                )
                         );
                         obstacles.add(obstacle);
                     }

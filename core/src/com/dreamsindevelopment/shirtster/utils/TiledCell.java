@@ -1,4 +1,4 @@
-package com.dreamsindevelopment.shirtster.handlers;
+package com.dreamsindevelopment.shirtster.utils;
 
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.badlogic.gdx.math.Rectangle;

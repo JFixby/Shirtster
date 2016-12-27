@@ -27,8 +27,7 @@ public class Player extends Entity implements InputProcessor {
         rightTexture = textureAtlas.findRegion("player_right");
         currentTexture = rightTexture;
 
-        position = new Vector2(boundingCircle.x, boundingCircle.y);
-        velocity = new Vector2(0f, 0f);
+        velocity = new Vector2(10f, 0f);
 
         Gdx.input.setInputProcessor(this);
     }
@@ -36,15 +35,15 @@ public class Player extends Entity implements InputProcessor {
     @Override
     public void act(float delta){
 
-        position.y -= gravity * delta;
-        position.x += velocity.x * delta;
+        //boundingCircle.y -= gravity * delta;
+        boundingCircle.x += velocity.x * delta;
     }
 
     @Override
     public void draw(Batch batch, float parentAlpha) {
         super.draw(batch, parentAlpha);
 
-        batch.draw(currentTexture, position.x, position.y);
+        batch.draw(currentTexture, boundingCircle.x, boundingCircle.y);
     }
 
     @Override
