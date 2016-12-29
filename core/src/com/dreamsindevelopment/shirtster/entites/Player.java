@@ -10,13 +10,6 @@ import com.dreamsindevelopment.shirtster.utils.Assets;
 
 public class Player extends Entity implements InputProcessor {
 
-    private TextureAtlas textureAtlas;
-    private TextureRegion leftTexture, rightTexture, currentTexture;
-    public float alpha = 1f;
-
-    private float baseVelocity = 64f, gravity = 96f;
-    private Vector2 position, velocity;
-
     private boolean jumped, jump;
 
     public Player(Entity entity) {
@@ -27,16 +20,14 @@ public class Player extends Entity implements InputProcessor {
         rightTexture = textureAtlas.findRegion("player_right");
         currentTexture = rightTexture;
 
-        velocity = new Vector2(10f, 0f);
-
         Gdx.input.setInputProcessor(this);
     }
 
     @Override
     public void act(float delta){
+        super.act(delta);
 
-        //boundingCircle.y -= gravity * delta;
-        boundingCircle.x += velocity.x * delta;
+        boundingCircle.y -= velocity.y * delta;
     }
 
     @Override
@@ -59,10 +50,10 @@ public class Player extends Entity implements InputProcessor {
                 currentTexture = leftTexture;
                 break;
 
-            /* TODO: Maybe for climbing down things (e.g. ladders)
+            // TODO: Maybe for climbing down things (e.g. ladders)
             case 47:// S
-                velocity.y = -0.1f;
-                break;*/
+                velocity.y = -baseVelocity;
+                break;
 
             case 32:// D
                 velocity.x = baseVelocity;

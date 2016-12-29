@@ -19,8 +19,8 @@ public class ShirtsterGame extends Game {
     public static final String TITLE = "Shirtster";
     public static final int V_WIDTH = 1024;
     public static final int V_HEIGHT = 768;
-    public static final float W_Width = 640f;
-    public static final float W_Height = 480f;
+    public static final float W_WIDTH = 640f;
+    public static final float W_HEIGHT = 480f;
 
     public SpriteBatch spriteBatch;
     public OrthographicCamera camera, hudCamera;
@@ -38,7 +38,7 @@ public class ShirtsterGame extends Game {
         hudCamera = new OrthographicCamera(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
         spriteBatch = new SpriteBatch();
 
-        stage = new Stage(new FitViewport(W_Width, W_Height, camera));
+        stage = new Stage(new FitViewport(W_WIDTH, W_HEIGHT, camera));
         skin = (Skin) Assets.get("pixthulhuSkin");
 
         Gdx.input.setInputProcessor(stage);

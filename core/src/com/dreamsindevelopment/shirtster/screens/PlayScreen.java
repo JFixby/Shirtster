@@ -3,11 +3,8 @@ package com.dreamsindevelopment.shirtster.screens;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
-import com.badlogic.gdx.math.Rectangle;
-import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.dreamsindevelopment.shirtster.entites.Entity;
 import com.dreamsindevelopment.shirtster.entites.Obstacle;
-import com.dreamsindevelopment.shirtster.handlers.Quadtree;
 import com.dreamsindevelopment.shirtster.utils.Assets;
 import com.dreamsindevelopment.shirtster.ShirtsterGame;
 import com.dreamsindevelopment.shirtster.entites.Player;
@@ -20,9 +17,7 @@ public class PlayScreen extends GameScreen {
     private TiledMap map;
     private OrthogonalTiledMapRenderer renderer;
 
-    Quadtree quadtree;
-    ArrayList<Entity> entityArrayList;
-
+    private ArrayList<Obstacle> obstacles;
     private Player player;
 
     public PlayScreen(ShirtsterGame game) {
@@ -36,9 +31,7 @@ public class PlayScreen extends GameScreen {
         map = TileManager.generateMap("level_1");
         renderer = new OrthogonalTiledMapRenderer(map, spriteBatch);
 
-        for(Obstacle obstacle : TileManager.obstacles){
-            stage.addActor(obstacle);
-        }
+        obstacles = TileManager.obstacles;
 
         for(Entity entity : TileManager.entities){
             if(!entity.type.equals("player")){
@@ -48,10 +41,6 @@ public class PlayScreen extends GameScreen {
 
         player = new Player(TileManager.findEntity("player"));
         stage.addActor(player);
-
-        quadtree = new Quadtree(0, new Rectangle(0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight()));
-        entityArrayList = new ArrayList<Entity>();
-        entityArrayList = quadtree.retrieve(entityArrayList, player);
 
         Gdx.input.setInputProcessor(player);
     }
@@ -71,23 +60,13 @@ public class PlayScreen extends GameScreen {
         renderer.setView(camera);
         renderer.render();
 
-        for(Actor actor : stage.getActors()){
-        }
-
-        quadtree.clear();
-        for(Entity entity : TileManager.entities){
-            quadtree.insert(entity);
-        }
-
-        for(Entity entity : TileManager.entities){
-            entityArrayList.clear();
-            quadtree.retrieve(entityArrayList, player);
-
-            //TODO: Adjust sizes to only check visible entities
-            for(Entity entity1 : entityArrayList){
-                Gdx.app.log("No.", "" + entityArrayList.size());
+        spriteBatch.begin();
+        for(Obstacle obstacle : obstacles){
+            if(obstacle.boundingBox.x < player.boundingCircle.x + Gdx.graphics.getWidth() && obstacle.boundingBox.x > player.boundingCircle.x - Gdx.graphics.getWidth()){
+                obstacle.draw(spriteBatch, obstacle.alpha);
             }
         }
+        spriteBatch.end();
 
         stage.act(delta);
         stage.draw();

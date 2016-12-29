@@ -79,8 +79,7 @@ public class TileManager {
 
                     entities = new ArrayList<Entity>();
                     for(int j=0; j<cellList.size(); j++){
-                        entity = new Entity();
-                        entity.setBoundingCircle(new Circle(
+                        entity = new Entity(new Circle(
                                 cellList.get(j).getBounds().x,
                                 cellList.get(j).getBounds().y,
                                 cellList.get(j).getBounds().width / 2
