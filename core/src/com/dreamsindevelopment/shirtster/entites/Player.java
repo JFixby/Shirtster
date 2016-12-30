@@ -4,8 +4,6 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
-import com.badlogic.gdx.graphics.g2d.TextureRegion;
-import com.badlogic.gdx.math.Vector2;
 import com.dreamsindevelopment.shirtster.utils.Assets;
 
 public class Player extends Entity implements InputProcessor {
@@ -26,15 +24,11 @@ public class Player extends Entity implements InputProcessor {
     @Override
     public void act(float delta){
         super.act(delta);
-
-        boundingCircle.y -= velocity.y * delta;
     }
 
     @Override
     public void draw(Batch batch, float parentAlpha) {
         super.draw(batch, parentAlpha);
-
-        batch.draw(currentTexture, boundingCircle.x, boundingCircle.y);
     }
 
     @Override

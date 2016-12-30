@@ -1,8 +1,10 @@
 package com.dreamsindevelopment.shirtster.screens;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
+import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.dreamsindevelopment.shirtster.entites.Entity;
 import com.dreamsindevelopment.shirtster.entites.Obstacle;
 import com.dreamsindevelopment.shirtster.utils.Assets;
@@ -19,6 +21,8 @@ public class PlayScreen extends GameScreen {
 
     private ArrayList<Obstacle> obstacles;
     private Player player;
+
+    ShapeRenderer shr;
 
     public PlayScreen(ShirtsterGame game) {
         super(game);
@@ -43,6 +47,9 @@ public class PlayScreen extends GameScreen {
         stage.addActor(player);
 
         Gdx.input.setInputProcessor(player);
+
+        shr = new ShapeRenderer();
+        shr.setAutoShapeType(true);
     }
 
     @Override
@@ -60,16 +67,18 @@ public class PlayScreen extends GameScreen {
         renderer.setView(camera);
         renderer.render();
 
-        spriteBatch.begin();
-        for(Obstacle obstacle : obstacles){
-            if(obstacle.boundingBox.x < player.boundingCircle.x + Gdx.graphics.getWidth() && obstacle.boundingBox.x > player.boundingCircle.x - Gdx.graphics.getWidth()){
-                obstacle.draw(spriteBatch, obstacle.alpha);
-            }
-        }
-        spriteBatch.end();
-
         stage.act(delta);
         stage.draw();
+
+        shr.setProjectionMatrix(camera.combined);
+        shr.begin();
+        for(Obstacle obstacle : obstacles){
+            shr.rect(obstacle.boundingBox.x, obstacle.boundingBox.y, obstacle.boundingBox.width, obstacle.boundingBox.height);
+        }
+        for(Actor entity : stage.getActors()){
+            shr.circle(((Entity) entity).collisionCircle.x, ((Entity) entity).collisionCircle.y, ((Entity) entity).collisionCircle.radius);
+        }
+        shr.end();
     }
 
     @Override

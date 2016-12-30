@@ -73,15 +73,15 @@ public class TileManager {
 
                     break;
 
-                //Entities
+                //Entities except Player
                 case 2:
                     filterCells(i);
 
                     entities = new ArrayList<Entity>();
                     for(int j=0; j<cellList.size(); j++){
                         entity = new Entity(new Circle(
-                                cellList.get(j).getBounds().x,
-                                cellList.get(j).getBounds().y,
+                                cellList.get(j).getBounds().x + cellList.get(j).getBounds().width / 2,
+                                cellList.get(j).getBounds().y + cellList.get(j).getBounds().width / 2,
                                 cellList.get(j).getBounds().width / 2
                                 )
                         );
@@ -131,9 +131,14 @@ public class TileManager {
         }
     }
 
+    /*
+    Searches and returns an entity with the given type.
+    Entity gets removed from ArrayList<Entitiy> entities.
+     */
     public static Entity findEntity(String type){
         for(Entity entity : entities){
             if(entity.type.equals(type)){
+                entities.remove(entity);
                 return entity;
             }
         }
